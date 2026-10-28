@@ -116,10 +116,10 @@ try {
   controls.autoRotateSpeed = 0.8;
   controls.addEventListener('start', () => { girar = false; });
 
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x2c3f55, 1.2));
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x2c4a3a, 1.2));
   const luz = new THREE.DirectionalLight(0xffffff, 2.2);
   luz.position.set(4, 6, 5);
-  const relleno = new THREE.DirectionalLight(0xcfe3f5, 0.9);
+  const relleno = new THREE.DirectionalLight(0xd3ecdf, 0.9);
   relleno.position.set(-5, 2, -4);
   scene.add(luz, relleno);
 

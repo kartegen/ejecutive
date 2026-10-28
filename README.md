@@ -1,4 +1,4 @@
-# Anatomía del cerebro (modelo 3D interactivo)
+# Disfunción ejecutiva (modelo 3D interactivo del cerebro)
 
 Haz clic en una región del cerebro (o elígela en la lista) y se abre una ventana con su información y videos de YouTube.
 

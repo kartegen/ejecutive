@@ -1,8 +1,8 @@
 :root {
-  --fondo-1: #123049;
-  --fondo-2: #07111d;
-  --claro: #f2f7fb;
-  --tenue: #9fb4c7;
+  --fondo-1: #124030;
+  --fondo-2: #07170f;
+  --claro: #f3f8f5;
+  --tenue: #a3bcae;
   --tinta: #0e1c2d;
   --papel: #f8fbfd;
   --linea: #d6e1ea;
@@ -68,7 +68,7 @@ a { color: inherit; }
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
 }
 .ventana[open] { display: flex; flex-direction: column; }
-.ventana::backdrop { background: rgba(4, 12, 22, 0.72); }
+.ventana::backdrop { background: rgba(4, 16, 10, 0.72); }
 .ventana :focus-visible { outline-color: var(--azul); }
 .v-cabecera { display: flex; align-items: flex-start; gap: 14px; padding: 20px 24px 14px; border-bottom: 1px solid var(--linea); }
 .v-cabecera div { flex: 1; }
