@@ -1,1 +1,62 @@
-Helloworld
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anatomía del cerebro: explora sus regiones</title>
+  <meta name="description" content="Modelo 3D interactivo del cerebro. Haz clic en una región para ver su información y videos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+  <main class="escenario">
+    <header class="cabecera">
+      <h1>Anatomía del cerebro</h1>
+      <p>Gira el modelo y haz clic en una región para ver su información y sus videos.</p>
+    </header>
+
+    <div class="lienzo" id="lienzo" role="img" aria-label="Modelo 3D del cerebro">
+      <p class="estado" id="estado" role="status">Cargando modelo…</p>
+    </div>
+
+    <nav class="leyenda" aria-label="Regiones del cerebro">
+      <ul id="lista-partes"></ul>
+    </nav>
+
+    <footer class="creditos">
+      Modelo 3D «Brain» de <a href="https://sketchfab.com/3d-models/brain-6ca0844a846b400695ff54553dc9bda4" target="_blank" rel="noopener">farhad.Guli</a>,
+      licencia <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.
+    </footer>
+  </main>
+
+  <div class="etiqueta" id="etiqueta" hidden></div>
+
+  <dialog class="ventana" id="ventana" aria-labelledby="v-titulo">
+    <header class="v-cabecera">
+      <span class="v-muestra" aria-hidden="true"></span>
+      <div>
+        <h2 id="v-titulo"></h2>
+        <p id="v-resumen"></p>
+      </div>
+      <button type="button" class="v-cerrar" id="v-cerrar" aria-label="Cerrar ventana">×</button>
+    </header>
+    <div class="v-cuerpo" id="v-cuerpo">
+      <section class="v-videos" id="v-videos" aria-label="Videos">
+        <div class="v-reproductor" id="v-reproductor"></div>
+        <ul class="v-lista" id="v-lista"></ul>
+      </section>
+      <section class="v-texto" id="v-texto"></section>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
