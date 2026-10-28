@@ -1,0 +1,2 @@
+# ejecutive
+Disfuncion ejecutiva
