@@ -1,0 +1,118 @@
+:root {
+  --fondo-1: #123049;
+  --fondo-2: #07111d;
+  --claro: #f2f7fb;
+  --tenue: #9fb4c7;
+  --tinta: #0e1c2d;
+  --papel: #f8fbfd;
+  --linea: #d6e1ea;
+  --foco: #ffd166;
+  --verde: #1f7a5c;
+  --azul: #1f5fa8;
+  --naranja: #e8832a;
+  --titulos: "Bricolage Grotesque", system-ui, sans-serif;
+  --lectura: "Source Serif 4", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: radial-gradient(ellipse at 65% 45%, var(--fondo-1), var(--fondo-2) 75%);
+  color: var(--claro);
+  font-family: var(--titulos);
+}
+:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+a { color: inherit; }
+
+/* Escenario */
+.escenario {
+  height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(250px, 310px) 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "cab lienzo" "ley lienzo" "cred lienzo";
+}
+.cabecera { grid-area: cab; padding: 28px 24px 12px; }
+.cabecera h1 { margin: 0 0 8px; font-size: clamp(1.7rem, 1rem + 1.6vw, 2.5rem); line-height: 1.05; font-weight: 700; }
+.cabecera p { margin: 0; color: var(--tenue); font-size: 0.98rem; line-height: 1.45; }
+.lienzo { grid-area: lienzo; position: relative; min-height: 0; overflow: hidden; }
+.lienzo canvas { position: absolute; inset: 0; display: block; cursor: grab; touch-action: none; }
+.estado { position: absolute; inset: 0; margin: auto; height: fit-content; max-width: 34ch; text-align: center; color: var(--tenue); line-height: 1.5; padding: 0 16px; }
+.creditos { grid-area: cred; padding: 12px 24px 20px; font-size: 0.78rem; color: var(--tenue); line-height: 1.4; }
+
+/* Leyenda */
+.leyenda { grid-area: ley; padding: 8px 16px; overflow-y: auto; }
+.leyenda ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.chip {
+  width: 100%; display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px; border: 0; border-radius: 8px;
+  background: transparent; color: var(--claro);
+  font: 500 1rem var(--titulos); text-align: left; cursor: pointer;
+  transition: background 0.15s;
+}
+.chip:hover { background: rgba(255, 255, 255, 0.09); }
+.punto { width: 14px; height: 14px; border-radius: 50%; background: var(--c); flex: none; }
+
+.etiqueta {
+  position: fixed; left: 0; top: 0; z-index: 5; pointer-events: none;
+  background: var(--tinta); color: var(--claro); padding: 6px 10px;
+  border-radius: 6px; font: 500 0.9rem var(--titulos);
+}
+.etiqueta[hidden] { display: none; }
+
+/* Ventana emergente */
+.ventana {
+  --c: #888;
+  width: min(1020px, 94vw); max-height: 90dvh; padding: 0;
+  border: 0; border-top: 6px solid var(--azul); border-radius: 14px;
+  background: var(--papel); color: var(--tinta);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+}
+.ventana[open] { display: flex; flex-direction: column; }
+.ventana::backdrop { background: rgba(4, 12, 22, 0.72); }
+.ventana :focus-visible { outline-color: var(--azul); }
+.v-cabecera { display: flex; align-items: flex-start; gap: 14px; padding: 20px 24px 14px; border-bottom: 1px solid var(--linea); }
+.v-cabecera div { flex: 1; }
+.v-muestra { width: 16px; height: 16px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35); margin-top: 9px; flex: none; }
+.v-cabecera h2 { margin: 0; font-size: 1.7rem; line-height: 1.15; }
+.v-cabecera p { margin: 4px 0 0; color: #4a5d70; font-family: var(--lectura); line-height: 1.45; }
+.v-cerrar { border: 0; background: transparent; font-size: 2rem; line-height: 1; padding: 0 8px; cursor: pointer; color: var(--tinta); border-radius: 6px; }
+.v-cerrar:hover { background: var(--linea); }
+.v-cuerpo { overflow: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; padding: 20px 24px 24px; align-items: start; }
+.v-cuerpo:has(.v-videos[hidden]) { grid-template-columns: minmax(0, 1fr); }
+.v-videos { position: sticky; top: 0; }
+.v-reproductor { aspect-ratio: 16 / 9; background: #0a0a0a; border-radius: 10px; overflow: hidden; }
+.v-reproductor iframe, .v-portada { width: 100%; height: 100%; border: 0; display: block; }
+.v-portada { position: relative; padding: 0; background: #0a0a0a; cursor: pointer; }
+.v-portada img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.v-play { position: absolute; inset: 0; margin: auto; width: 68px; height: 48px; border-radius: 12px; background: rgba(10, 10, 10, 0.88); }
+.v-play::after { content: ""; position: absolute; inset: 0; margin: auto; width: 0; height: 0; border-left: 18px solid #fff; border-top: 11px solid transparent; border-bottom: 11px solid transparent; transform: translateX(3px); }
+.v-portada:hover .v-play { background: var(--azul); }
+.v-lista { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+.v-item { width: 100%; text-align: left; padding: 10px 12px; border: 1px solid var(--linea); border-left: 4px solid transparent; border-radius: 6px; background: #fff; font: 500 0.95rem var(--titulos); color: var(--tinta); cursor: pointer; }
+.v-item[aria-current] { border-left-color: var(--verde); background: #eaf2f9; }
+.v-texto { font-family: var(--lectura); font-size: 1.02rem; line-height: 1.6; max-width: 62ch; }
+.v-texto p { margin: 0 0 0.8em; }
+.v-seccion { border-bottom: 1px solid var(--linea); padding: 4px 0; }
+.v-seccion summary { font: 700 1.05rem var(--titulos); padding: 10px 0; cursor: pointer; }
+.v-seccion[open] summary { color: var(--azul); }
+.v-seccion dt { font: 700 0.95rem var(--titulos); margin-top: 0.7em; }
+.v-seccion dd { margin: 0.1em 0 0.5em; }
+.v-aviso { margin-top: 1.2em; padding: 10px 14px; border-left: 4px solid var(--naranja); background: #fff6e6; font-size: 0.92rem; }
+.v-ref { font-size: 0.88rem; }
+.v-vacio { color: #4a5d70; }
+.v-texto mark.clave { background: linear-gradient(transparent 55%, #ffd166 55%); color: inherit; font-weight: 600; padding: 0 1px; }
+
+/* Móvil */
+@media (max-width: 760px) {
+  .escenario { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto auto; grid-template-areas: "cab" "lienzo" "ley" "cred"; }
+  .cabecera { padding: 16px 16px 6px; }
+  .cabecera p { font-size: 0.9rem; }
+  .leyenda { padding: 6px 12px; overflow-x: auto; overflow-y: hidden; }
+  .leyenda ul { flex-direction: row; width: max-content; }
+  .chip { width: auto; white-space: nowrap; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 999px; padding: 8px 14px; }
+  .creditos { padding: 6px 16px 12px; }
+  .v-cuerpo { grid-template-columns: 1fr; gap: 16px; padding: 16px; }
+  .v-videos { position: static; }
+  .ventana { width: 100vw; max-height: 94dvh; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
